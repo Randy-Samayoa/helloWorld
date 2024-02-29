@@ -1,0 +1,32 @@
+/* The following turns all words blue and sets the size of the letters to 15px*/
+p{
+    color: blue;
+    font-size: 15px;
+}
+
+/* The following sets all the level 2 headers to the color darkblue and bolds them*/
+h2{
+    color: darkblue;
+    font-weight: bold;
+}
+
+/* This code puts borders on the outer table, columns, and headers*/
+table,td,th{
+    border-style:solid;
+    border-width: 3px;
+}
+
+p#third_paragraph{
+    color: green;
+    font-style: italic;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+img.logo {
+    width: 315px;
+    height: 120px;
+
+}
