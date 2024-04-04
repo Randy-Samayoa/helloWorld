@@ -1,0 +1,6 @@
+tree 9f4f7d48f80a9af6b10220d493b8bfe8c036d3e0
+parent 7ba02864fe275ae45bea434e436ffff143797800
+author Randy <rsamayoa@umd.edu> 1712247615 -0400
+committer Randy <rsamayoa@umd.edu> 1712247615 -0400
+
+I replaced my app.py file with the professor's and I modified the file to include the new student e-mail field.
