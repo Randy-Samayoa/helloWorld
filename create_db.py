@@ -6,7 +6,7 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-    # Initial loading of majors
+    # Initial loading of the majors
     majors = ['Accounting', 'Finance', 'Information Systems', 'International Business', 'Management', \
               'Operations Management & Business Analytics', 'Supply Chain Management']
     for each_major in majors:
