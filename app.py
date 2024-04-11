@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'beyond_course_scope'
 db.init_app(app)
 
-
+#This route belongs to the student view page
 @app.route('/student/view')
 def student_view_all():
     students = Student.query.outerjoin(Major, Student.major_id == Major.major_id) \
@@ -20,7 +20,7 @@ def student_view_all():
         .all()
     return render_template('student_view_all.html', students=students)
 
-
+#This code handles the query for student ID. If the student that is attempted to be viewed does not exist, it will return a message
 @app.route('/student/view/<int:student_id>')
 def student_view(student_id):
     student = Student.query.filter_by(student_id=student_id).first()
@@ -36,6 +36,7 @@ def student_view(student_id):
         return redirect(url_for('student_view_all'))
 
 
+#This route handles the function of creating a new entry. The entry includes first name, last name, student email, and major id
 @app.route('/student/create', methods=['GET', 'POST'])
 def student_create():
     if request.method == 'GET':
@@ -62,7 +63,8 @@ def student_create():
     flash('Invalid action. Please try again.', 'error')
     return redirect(url_for('student_view_all'))
 
-
+#This code deals with updating an existing student entry. A message will apear to confirm the existing student has been updated
+#The code will send a message if the student does not exist
 @app.route('/student/update/<int:student_id>', methods=['GET', 'POST'])
 def student_edit(student_id):
     if request.method == 'GET':
@@ -83,7 +85,7 @@ def student_edit(student_id):
         if student:
             student.first_name = request.form['first_name']
             student.last_name = request.form['last_name']
-            student.email = request.form['email']
+            student.email = request.form['student_email']
             student.major_id = request.form['major_id']
             student.birthdate = dt.strptime(request.form['birth_date'], '%Y-%m-%d')
             student.num_credits_completed = request.form['num_credits_completed']
@@ -99,7 +101,7 @@ def student_edit(student_id):
 
     return redirect(url_for('student_view_all'))
 
-
+#This code deals with deleting a student entry
 @app.route('/student/delete/<int:student_id>')
 def student_delete(student_id):
     student = Student.query.filter_by(student_id=student_id).first()
@@ -112,7 +114,6 @@ def student_delete(student_id):
         flash(f'Delete failed! Student could not be found.', 'error')
 
     return redirect(url_for('student_view_all'))
-
 
 @app.route('/')
 def home():
