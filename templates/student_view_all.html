@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    View All Students
+{% endblock %}
+
+{% block page_head %}
+    View All Students
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+    <div class="col">
+
+    <table class="table table-striped">
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Email</th>
+            <th>Major</th>
+            <th>Is Honors?</th>
+            {% if current_user.role in ['ADMIN', 'MANAGER'] %}
+            <th>Actions</th>
+            {% endif %}
+        </tr>
+
+        {% for each_student, each_major in students %}
+        <tr>
+            <td><a href="{{ url_for('student_view', student_id=each_student['student_id']) }}">{{ each_student['last_name'] }}</a></td>
+            <td>{{ each_student['first_name'] }}</td>
+            <td>{{ each_student['email'] }}</td>
+            <td>{{ each_major['major'] }}</td>
+            <td>{{ 'Yes' if each_student['is_honors'] == 1 else 'No' }}</td>
+            {% if current_user.role in ['ADMIN', 'MANAGER'] %}
+            <td>
+                <a href="{{ url_for('student_edit', student_id=each_student['student_id']) }}" class="btn btn-secondary" role="button">Edit</a>
+                {% if current_user.role in ['ADMIN'] %}
+                <a href="{{ url_for('student_delete', student_id=each_student['student_id']) }}" class="btn btn-secondary" role="button">Delete</a>
+                {% endif %}
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    </div>
+
+    {% if current_user.role in ['ADMIN', 'MANAGER'] %}
+    <div class="row">
+        <div class="col">
+            Total Number of Students: {{ students|length }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col text-center">
+            <a href="{{ url_for('student_create') }}" class="btn btn-primary" role="button">Add New Student</a>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}
+
+
