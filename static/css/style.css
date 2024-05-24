@@ -1,32 +1,325 @@
-/* The following turns all words blue and sets the size of the letters to 15px*/
-p{
-    color: blue;
-    font-size: 15px;
+.smokywhite {
+    background-color: whitesmoke;
+    padding: 40px;
 }
 
-/* The following sets all the level 2 headers to the color darkblue and bolds them*/
-h2{
-    color: darkblue;
+.body-without-padding{
+    background-color:#F5F5F5;
+    margin:0px;
+    height:100%;
+    weight:100%;
+}
+
+/* color and style of all big headers*/
+h1 {
+    color: whitesmoke;
+    font-size: 3em;
+    font-weight: bold;
+    font-family: SansSerif;
+    text-align: center;
+}
+
+h1.account {
+    color: black;
+    font-size: 3em;
+    text-align: center;
+    font-family: SansSerif;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+}
+
+body.graycolor {
+    background-color:lightgray;
+}
+
+body.white {
+    background-color: white;
+    padding: 40px;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.login-form {
+    padding: 100px;
+    border-radius: 60px;
+    background: #5585D9;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-image {
+    max-width: 100%;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create-acc-form {
+    padding: 100px;
+    background: #185E3F;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin:auto;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+
+h1.centered {
+    text-align: center;
+    margin-bottom: 50px;
+    background-color: #5585D9;
+    padding: 30px 0;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     font-weight: bold;
 }
 
-/* This code puts borders on the outer table, columns, and headers*/
-table,td,th{
-    border-style:solid;
-    border-width: 3px;
+
+input.distanced , select.distanced, textarea.distanced { /* Adding a space under inputs for clarity */
+    display: block;
+    text-align: center;
+    margin-bottom: 50px;
+    width: 100%;
 }
 
-p#third_paragraph{
-    color: green;
-    font-style: italic;
+
+form.centered {
+    display: flex;
+    flex-direction:  column;
+    text-align: center;
 }
 
-.capitalize {
-    text-transform: capitalize;
+.name-fields-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%
 }
 
-img.logo {
-    width: 315px;
-    height: 120px;
+.name-field {
+    flex: 1;
+    margin: 0 10px
+}
 
+.select-container {
+    margin-bottom: 50px;
+}
+
+
+input[type="submit"] {
+    background-color: #5585D9 ;
+    margin:auto;
+    border: black;
+    border-radius: 200px;
+    width: 30%;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+}
+
+.table {
+    margin-left: 5px;
+    margin-bottom: 0;
+    /* Style for odd rows */
+
+    tr:nth-child(odd) {
+        background-color: white;
+    }
+
+    /* Style for even rows */
+
+    tr:nth-child(even) {
+        background-color: #F5F5F5;
+    }
+}
+
+.cardstyle {
+    background-color: #728c69;
+    border-radius: 25px;
+    padding: 30px;
+}
+
+.cardcolor {
+    background-color: #728c69;
+    background-color: #728c69;
+}
+
+.card-text-style {
+    font-size: 22px;
+    color: white;
+    margin-bottom: 20px;
+    font-family: SansSerif;
+
+}
+
+.card-text{
+    font-family: SansSerif;
+    font-size: 20px;
+}
+
+.form-text{
+    font-family: SansSerif;
+    font-size: 16px;
+    color: black;
+
+}
+.col-form-label{
+    font-family: SansSerif;
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+}
+
+.btn{
+    font-family: SansSerif;
+
+}
+
+.card-title{
+    font-family: SansSerif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.spacing-bottom {
+    margin-bottom: 100px;
+}
+
+.move-left {
+    padding-right: 96px;
+}
+
+.table-dark-details {
+    background-color: #FFFFED;
+    color: #000000; /* White text color */
+}
+
+.table-dark-details thead th {
+    color: #000000; /* Ensure the header text is also white for visibility */
+}
+
+.customer-navbar-color {
+    background-color: #5585D9;
+}
+
+
+.carousel-container {
+    max-width: 90%;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.carousel-inner {
+    margin-bottom: 0;
+}
+
+.customer2-navbar-color {
+    background-color: #5585D9 ;
+    margin-top: -40px;
+    margin-right: -40px;
+    margin-left: -40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid black;
+}
+
+.navbar-border{
+    border-bottom: 1px solid black;
+}
+
+.btn-primary{
+       color: #fff;
+       font-weight: bold;
+       background-color: #354A21;
+       border-color: #354A21;
+       float: right;
+       padding: 5px;
+       margin-right: 15px;
+       margin-bottom: 20px;
+}
+
+.h1-notif-page{
+    margin-top:40px;
+    text-align: center;
+    line-height: 1.15;
+}
+
+.h2-notif-page{
+    text-align: center;
+    line-height: 1.15;
+}
+
+.fa-bell{
+ align-items: center;
+ margin-left: 10px;
+}
+
+.content-container {
+  margin-top: 60px;
+  height: 40px;
+  padding: 10px;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+}
+
+.backgroundphoto1{
+  border: 1px solid black;
+  padding: 200px;
+  background: url(https://i.postimg.cc/pTkmsc6m/clean-floor.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 30px;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.button-spacing {
+    margin-top: 10px;
+}
+
+.dropdown-spacing {
+    margin-bottom: 20px;  /* Adjust this value based on the required spacing */
+}
+
+/* Used to style the paragraph seen on About page.*/
+h1.special{
+    color: black;
+    font-family: SansSerif;
+    font-size: 22px;
+    text-align: center;
+    font-weight: normal;
+}
+
+/*Used to style the bullet points seen on the About page.*/
+ul{
+    color:black;
+    font-family: SansSerif;
+    font-size: 18px;
+    list-style-type: square;
+    list-style-position: inside;
+    text-align: left;
 }
