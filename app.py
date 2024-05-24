@@ -1,3 +1,4 @@
+
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
@@ -31,7 +32,7 @@ def load_user(user_id):
 
 @app.route('/')
 def home_page():
-   return render_template('about.html')
+   return render_template('welcome.html')
 
 
 @app.route('/login-page', methods =['GET','POST'])
