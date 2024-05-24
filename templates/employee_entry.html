@@ -1,0 +1,28 @@
+{% extends "manager_base.html" %}
+
+{% block page_content %}
+<h1 class="centered">{{ action }} Employee</h1>
+<form action="{{ url_for('employee_create') }}" method="post">
+    <div class="form-group">
+        <label for="employee_fname">First Name</label>
+        <input type="text" class="form-control" id="employee_fname" name="employee_fname" required>
+    </div>
+    <div class="form-group">
+        <label for="employee_lname">Last Name</label>
+        <input type="text" class="form-control" id="employee_lname" name="employee_lname" required>
+    </div>
+    <div class="form-group">
+        <label for="employee_job_title">Job Title</label>
+        <input type="text" class="form-control" id="employee_job_title" name="employee_job_title" required>
+    </div>
+    <div class="form-group">
+        <label for="employee_email">Email</label>
+        <input type="email" class="form-control" id="employee_email" name="employee_email" required>
+    </div>
+    <div class="form-group">
+        <label for="employee_phone">Phone Number</label>
+        <input type="text" class="form-control" id="employee_phone" name="employee_phone" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

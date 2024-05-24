@@ -1,0 +1,123 @@
+{% extends "client_base.html" %}
+
+{% block page_title %}Work Request{% endblock %}
+
+<!-- These are extra CSS and JS URLs that this page requires.-->
+{% block extra_css_js %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" >
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+{% endblock %}
+
+{% block page_content %}
+
+<!-- Provides the customer with confirmation of their request. Readable form of data entered.-->
+{% if form_submitted %}
+<table class="table">
+        <thead>
+            <tr>
+                <th>Work Phone Number</th>
+                <th>Personal Phone Number</th>
+                <th>Business Name</th>
+                <th>Address</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Zip Code</th>
+                <th>Special Request</th>
+                <th>Date and Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ submitted_data['work_phonenumber'] }}</td>
+                <td>{{ submitted_data['personal_phonenumber'] }}</td>
+                <td>{{ submitted_data['business_name'] }}</td>
+                <td>{{ submitted_data['address'] }}</td>
+                <td>{{ submitted_data['state'] }}</td>
+                <td>{{ submitted_data['city'] }}</td>
+                <td>{{ submitted_data['zipcode'] }}</td>
+                <td>{{ submitted_data['special_request'] }}</td>
+                <td>{{ submitted_data['date_and_time'] }}</td>
+            </tr>
+        </tbody>
+
+<!-- Buttons placed underneath the table confirming the work request submission. -->
+    </table>
+    <div class="d-flex justify-content-center">
+        <a href="{{ url_for('customer_dashboard') }}" class="btn btn-primary mt-3">Return to Dashboard</a>
+        <a href="{{ url_for('work_request_form') }}" class="btn btn-primary mt-3">Submit Another Request</a>
+    </div>
+
+
+{% else %}
+
+<!-- The different fields used to build the Work Request Form. -->
+<h1 class="centered"> Work Request Form </h1>
+
+    <form class="centered" method="POST" action="/workrequest">
+    <div class="name-fields-container">
+    </div>
+      <div class="name-fields-container">
+        <div class="name-field">
+            <!-- Work Phone Number input-->
+            <label for="workphone">Work Phone Number:</label>
+            <input class="distanced" type="tel" id="workphone" name="work_phonenumber" placeholder="Enter your work phone # (10 digits)" pattern="\d{10}" maxlength="10" required>
+        </div>
+        <div class="name-field">
+            <!-- Personal Phone Number input -->
+            <label for="personalphone">Personal Phone Number:</label>
+            <input class="distanced" type="tel" id="personalphone" name="personal_phonenumber" placeholder="Enter your personal phone # (10 digits)" pattern="\d{10}" maxlength="10" required>
+        </div>
+      </div>
+    <!-- Business Name input -->
+    <label for="businessname">Business Name</label>
+    <input  class="distanced" type="text" id="businessname" name="business_name" placeholder="Enter your Business name" required>
+    <div class="name-fields-container">
+        <div class="name-field">
+            <!-- Address input -->
+            <label for="address">Address (Location of work):</label>
+            <input class="distanced" type="text" id="address" name="address" placeholder="Enter the address of the place you would like to have work done at" required>
+        </div>
+        <div class="name-field">
+            <!-- State input -->
+            <label for="state">State:</label>
+            <input class="distanced" type="text" id="state" name="state" placeholder="Enter your state" required>
+        </div>
+        <div class="name-field">
+            <!-- City input -->
+            <label for="city">City:</label>
+            <input class="distanced" type="text" id="city" name="city" placeholder="Enter your city" required>
+        </div>
+        <div class="name-field">
+            <!-- Zipcode input -->
+            <label for="zipcode">Zip-Code:</label>
+            <input class="distanced" type="number" id="zipcode" name="zipcode" placeholder="Enter your Zip-Code"  min="501" max="99950" required>
+        </div>
+    </div>
+    <!-- Section for service_id to be iterated through -->
+       <div class="select-container">
+            <label for="service_id">Service Type:</label>
+            <select class="distanced select2" id="service_id" name="service_id" required>
+                <option value="">---Select A Service---</option>
+                {% for service in services %}
+                <option value="{{ service.service_id }}">{{ service.service }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    <label for="special_request">Special Request:</label>
+    <textarea class="distanced" id="special_request" name="special_request" placeholder="Enter any special requests"></textarea>
+    <label for="datetime">Date & Time</label>
+    <input class="distanced" type="datetime-local" id="datetime" name="date_and_time" required>
+    <input type="submit" value="Submit">
+</form>
+{% endif %}
+<script>
+$(document).ready(function() {
+    $('.select2').select2();
+});
+</script>
+
+{% endblock %}
+

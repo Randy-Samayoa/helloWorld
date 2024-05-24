@@ -1,0 +1,31 @@
+{% extends "employee_base.html" %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block page_content %}
+
+<!-- Welcome Employee by name -->
+<div class="backgroundphoto1">
+  <h1>Welcome, {{ user_name }}!</h1>
+</div>
+
+<!-- Container that consists of summary and button for employees to view their schedule. -->
+<div class="container">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-sm-6">
+      <div class="card h-100">
+        <div class="card-body cardcolor">
+          <h3 class="card-title">Schedule</h3>
+
+          {% for assignment in assignments[:3] %}  <!-- Only allowing up to 3 assignments to be shown for spacing reasons -->
+          <p class="card-text"><strong>{{ assignment.project.date_and_time.strftime('%A, %m/%d/%Y %H:%M') }}</strong> at {{ assignment.project.address }}</p>
+          {% endfor %}
+
+          <a href="/work-schedule" class="btn btn-primary">See More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

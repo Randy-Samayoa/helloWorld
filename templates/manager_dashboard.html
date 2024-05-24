@@ -1,0 +1,80 @@
+{% extends "manager_base.html" %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+
+{% block page_content %}
+
+
+<h1 class="centered">Welcome, Wil Wiscovitch!</h1>
+
+<!-- create cards for shorcut navigation across page -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card h-100 cardcolor">
+                <div class="card-body">
+                <h3 class="card-title">Upcoming Projects</h3>
+                {% for projects in upcoming_projects %}
+                    <p class="card-text">{{ projects.date_and_time }} - {{ projects.service.service }} at {{ projects.address  }}</p>
+                {% endfor %}
+                <a href="/upcoming-projects" class="btn btn-primary">See More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card h-100 cardcolor">
+                <div class="card-body">
+                    <h3 class="card-title">Pending Requests</h3>
+                     {% for request in pending_requests %}
+                     {% if not request.is_approved %}
+                     <p class="card-text">{{ request.date_and_time }} - {{ request.service.service }} at {{ request.address  }}</p>
+                     {% endif %}
+                     {% endfor %}
+                    <a href="/workrequest-receipt" class="btn btn-primary">See More </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+            <div class="card-body cardcolor">
+            <h3 class="card-title">Clients</h3>
+                        <p class="card-text">Total Number of Clients: {{ total_customers }}</p>
+                <a href="/client-info" class="btn btn-primary">See More</a>
+            </div>
+        </div>
+        </div>
+        <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+            <div class="card-body cardcolor">
+            <h3 class="card-title">Employees</h3>
+                <p class="card-text">Total Number of Employees: {{ total_employees }}</p>
+                <a href="/employees" class="btn btn-primary">See More</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+            <div class="card-body cardcolor">
+                <h3 class="card-title">Past Projects</h3>
+                <a href="/project-history" class="btn btn-primary">See More</a>
+            </div>
+         </div>
+        </div>
+        <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+            <div class="card-body cardcolor">
+                <h3 class="card-title">Analytics</h3>
+                <a href="/reports" class="btn btn-primary">See More</a>
+            </div>
+         </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

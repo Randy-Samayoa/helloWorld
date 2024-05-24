@@ -1,0 +1,48 @@
+{% extends "manager_base.html" %}
+
+{% block page_title %}Project History{% endblock %}
+
+{% block page_content %}
+<h1 class="centered">Project History</h1>
+<div class="container-fluid mt-4">
+    <!-- Table for contact, phone number, and email -->
+    <table class="table mb-5">
+        <thead>
+            <tr>
+                <th>Contacts</th>
+                <th>Number</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Address</th>
+                <th>Service</th>
+                <th>Quote</th>
+                <th>Undo Completion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterating through ALL requests and showing the fields below -->
+            {% for request in requests %}
+            <tr>
+                <td>{{ request.business_name }}</td>
+                <td>{{ request.work_phonenumber }}</td>
+                <td>{{ request.user.email }}</td>
+                <td>{{ request.date_and_time }}</td>
+                <td>{{ request.address }}</td>
+                <td>{{ request.service.service }}</td>
+                <td>{{ request.quote}}</td>
+                <td><!-- Toggle Project Completion Button -->
+                            <form method="POST" action="{{ url_for('complete_project', project_id=request.project_id) }}">
+                                <button type="submit" class="btn btn-primary">
+                                    {% if request.is_completed %}
+                                        Click to undo
+                                {% endif %}
+                                </button>
+                            </form></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "employee_base.html" %}
+
+{% block page_title %}Work Schedule{% endblock %}
+
+{% block page_content %}
+<h1 class="centered">Work Schedule</h1>
+
+{% if assignments %}
+    <!-- Loop through each assignment and display its details -->
+    {% for assignment in assignments %}
+    <div class="row justify-content-center">
+        <div class="col-md-11">
+            <div class="my-2 border cardstyle">
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <p class="card-text-style">
+                                <strong>Date:</strong> {{ assignment.project.date_and_time.strftime("%A, %m/%d/%Y") if assignment.project.date_and_time else 'Date not set' }}<br>
+                                <strong>Time:</strong> {{ assignment.project.date_and_time.strftime("%H:%M %p") if assignment.project.date_and_time else 'Time not set' }}<br>
+                                <strong>Location:</strong> {{ assignment.project.address if assignment.project.address else 'Location not set' }}<br>
+                                <strong>Service:</strong> {{ assignment.project.service.service if assignment.project.service else 'Service not set' }}<br>
+                                <strong>Status:</strong> {{ 'Work Completed' if assignment.project.is_completed else 'Work Not Completed' }}<br>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+<!-- If the details above are not submitted, it will show nothing scheduled. -->
+{% else %}
+    <div class="row justify-content-center">
+        <div class="col-md-11">
+            <p>No assignments scheduled.</p>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

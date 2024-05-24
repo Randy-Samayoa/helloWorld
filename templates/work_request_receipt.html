@@ -1,0 +1,55 @@
+{% extends "manager_base.html" %}
+
+{% block page_title %}Work Request Review{% endblock %}
+
+{% block page_content %}
+<h1 class="centered">Work Request Review</h1>
+
+<div class="container-fluid mt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Business Name</th>
+                <th>Work #</th>
+                <th>Email</th>
+                <th>Service Type(s)</th>
+                <th>Special Requests</th>
+                <th>Requested Date</th>
+                <th>Address</th>
+                <th>Quote</th>
+                <th>Size of Worksite (sq ft)</th>
+                <th>Confirmed Start Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!-- Iterating through requests which are fields work requests where quoted = false -->
+            {% for request in requests %}
+                <form method="POST" action="{{ url_for('submit_quote', client_id=request.workrequest_ID) }}">
+                <tr>
+                    <td>{{ request.business_name }}</td>
+                    <td>{{ request.work_phonenumber }}</td>
+                    <td>{{ request.user.email }}</td>
+                    <td>{{ request.service.service }}</td>
+                    <td>{{ request.special_request }}</td>
+                    <td>{{ request.date_and_time }}</td>
+                    <td>{{ request.address}}</td>
+                    <td>
+                        <input type="text" name="quote" class="form-control" placeholder="Enter quote here" required>
+                    </td>
+                    <td>
+                        <input type="number" name="square_footage" class="form-control" placeholder="Enter square footage" required>
+                    </td>
+                    <td>
+                        <input type="datetime-local" name="confirmed_start_date" class="form-control" required>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary">Send Quote</button>
+                    </td>
+                </tr>
+            </form>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

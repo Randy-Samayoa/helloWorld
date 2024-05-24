@@ -1,0 +1,49 @@
+{% extends "manager_base.html" %}
+
+{% block page_title %}Employees{% endblock %}
+
+
+{% block page_content %}
+
+<h1 class="centered">Employee Roster</h1>
+
+
+<div class="row">
+  <div class="col text-center">
+    <a href="/employee-account-creation" class="btn btn-primary" role="button">Create New Employee Account</a>
+  </div>
+</div>
+
+<table class="table table-striped">
+    <tr>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Title</th>
+        <th>Email</th>
+        <th>Employee ID</th>
+        <th>Action</th>
+    </tr>
+
+    <!-- looping through each employee in employee_list -->
+
+    {% for employee in employees_list %}
+    <tr>
+         <td>{{ employee.last_name }}</td>
+         <td>{{ employee.first_name }}</td>
+         <td>{{ employee.title }}</td>
+         <td>{{ employee.email }}</td>
+         <td>{{ employee.user_id }}</td>
+         {% if current_user.role in ['ADMIN', 'MANAGER'] %}
+         <td>
+             <a href="{{ url_for('edit_employee', user_id=employee.user_id) }}" class="btn btn-secondary" role="button">Edit</a>
+             {% if current_user.role in ['ADMIN', 'MANAGER'] %}
+             <a href="{{ url_for('employee_delete', user_id=employee.user_id)}}" class="btn btn-danger" role="button">Delete</a>
+             {% endif %}
+         </td>
+            {% endif %}
+    </tr>
+   {% endfor %}
+</table>
+
+
+ {% endblock %}

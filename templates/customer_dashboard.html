@@ -1,0 +1,66 @@
+{% extends "client_base.html" %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block page_content %}
+
+<!-- Add background photo for decoration; welcomes customer by name. -->
+<div class="backgroundphoto1">
+  <h1>Welcome, {{ user_name }}!</h1>
+</div>
+
+<!-- Add cards to Showcase Dashboard Navigation for customer. -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card h-100 cardcolor">
+                <div class="card-body">
+                    <h3 class="card-title">Expect Us On</h3>
+                     <!-- Loop through request to provide start time approved by manager. -->
+                     {% for request in pending_requests %}
+                     <p class="card-text">{{ request.confirmed_start_date.strftime('%Y-%m-%d %H:%M') if request.is_approved  }}</p>
+                     {% endfor %}
+
+                    <a href="/upcoming-appointments" class="btn btn-primary">See More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card h-100 cardcolor">
+                <div class="card-body">
+                    <h3 class="card-title">Pending Request Services</h3>
+
+                     <!-- Loop through request to provide summary in dashboard. -->
+                     {% for request in pending_requests %}
+                     {% if not request.is_approved %}
+                     <p class="card-text">{{ request.date_and_time }} - {{ request.service.service }} at {{ request.address  }}</p>
+                     {% endif %}
+                     {% endfor %}
+
+                   <a href="/previous-requests" class="btn btn-primary">See More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+            <div class="card-body cardcolor">
+                <h5 class="card-title">Request Services</h5>
+                <p>Make work request here!</p>
+                <a href="/workrequest" class="btn btn-primary">Click Here</a>
+            </div>
+        </div>
+        </div>
+        <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+            <div class="card-body cardcolor">
+                <h5 class="card-title">Notifications</h5>
+                <p>Hello {{ user_name }}, you have {{ notification_count }} notifications!</p>
+                <a href="/customer-notifications" class="btn btn-primary">See More</a>
+            </div>
+         </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

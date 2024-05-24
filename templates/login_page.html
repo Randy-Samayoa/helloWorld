@@ -1,0 +1,39 @@
+{% extends "home_base.html" %}
+{% block page_title %}Login{% endblock %}
+{% block page_content %}
+
+<!-- Create container for proper format and eliminate white spaces.  -->
+<div class="login-container">
+   <img src=https://i.postimg.cc/jjC6j0p9/logo-with-f5f5f5-background.png alt="Company Logo" class="login-image">
+
+
+    <form class="login-form" action="{{ url_for('login_page') }}" method="POST">
+        <!-- Email/username input  -->
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="inputEmail" class="col-form-label">Email:</label>
+                <input type="text" id="inputEmail" name="email" class="form-control" placeholder="Enter Email" required>
+            </div>
+        </div>
+        <!-- Password input  -->
+        <div class="row g-3 align-items-center">
+             <div class="col-auto">
+               <label for="inputPassword" class="col-form-label">Password:</label>
+               <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Enter Password" required aria-describedby="passwordHelpInline">
+             </div>
+             <div class="col-auto">
+                 <span id="passwordHelpInline" class="form-text">
+                    Must be 8-20 characters long.
+                 </span>
+             </div>
+        </div>
+
+         {% if redirect_route %}
+             <input type="hidden" name="redirect_route" value="{{ redirect_route }}">
+         {% endif %}
+
+     <!-- Submit button to log into the website  -->
+       <button type="submit" class="btn btn-light">Login</button>
+     </form>
+</div>
+{% endblock %}

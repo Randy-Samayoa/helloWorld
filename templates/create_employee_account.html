@@ -1,0 +1,59 @@
+{% extends "manager_base.html" %}
+
+{% block page_title %}Create Employee Account{% endblock %}
+
+{% block page_head %}Create Account{% endblock %}
+
+{% block page_content %}
+
+
+<h1 class="account">Create Employee Account</h1>
+
+   <form action="{{ url_for('create_employee_account') }}" method="POST">
+     <div class="form row">
+         <div class="col-md-6">
+         <!-- First Name input-->
+             <label for="inputFirstName" class="col-form-label">First Name:</label>
+             <input type="text" id="inputFirstName" name="first_name" class="form-control" placeholder="Enter First Name" required>
+         </div>
+         <!-- Last Name input -->
+         <div class="col-md-6">
+             <label for="inputLastName" class="col-form-label">Last Name:</label>
+             <input type="text" id="inputLastName" name="last_name" class="form-control" placeholder="Enter Last Name" required>
+         </div>
+     </div>
+
+     <div class="form row">
+       <div class="col-md-6">
+           <!--Title input-->
+           <label for="inputTitle" class="col-form-label">Title:</label>
+           <input type="text" id="inputTitle" name="title" class="form-control" placeholder="Enter Employee Title (Add PT/FT Status)" required>
+       </div>
+       <div class="col-md-6">
+             <!-- Phone Number input -->
+             <label for="inputPhone" class="col-form-label">Phone:</label>
+             <input type="text" id="inputPhone" name="phone" class="form-control" placeholder="Enter Employee Phone Number (10 Digits)" pattern="\d{10}" maxlength="10" required>
+       </div>
+     </div>
+     <div class="form row">
+         <!-- Email input -->
+         <div class="col-md-6">
+             <label for="inputEmail" class="col-form-label">Enter Email as Username:</label>
+             <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Username" required>
+         </div>
+
+         <!-- Password input -->
+         <div class="col-md-6">
+                 <label for="inputPassword" class="col-form-label">Password:</label>
+                 <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Enter Password" required aria-describedby="passwordHelpInline" minlength="8" maxlength="20">
+                 <span id="passwordHelpInline" class="form-text">
+                   Must be 8-20 characters long.
+                 </span>
+         </div>
+     </div>
+
+     <!-- Submit button for the form -->
+     <button type="submit" class="btn btn-primary">Create Account</button>
+   </form>
+
+{% endblock %}

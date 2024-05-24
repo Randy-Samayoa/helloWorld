@@ -1,0 +1,52 @@
+{% extends "client_base.html" %}
+
+{% block page_title %}Upcoming Appointments{% endblock %}
+
+{% block page_content %}
+<h1 class="centered">Upcoming Appointments</h1>
+
+<!-- Looping through each request and display it in a card -->
+<div class="container">
+    {% for request in requests %}
+    <div class="row justify-content-center">
+        <div class="col-md-11">
+            <div class="my-2 border cardstyle">
+                <div class="card-body">
+                    <div class="row">
+                        <!--Left Side of the card -->
+                        <div class="col-md-6">
+                            <p class="card-text-style">
+                                <strong class="spacing-bottom">Confirmed Date and Time:</strong> {{ request.confirmed_start_date.strftime('%Y-%m-%d %H:%M') if request.confirmed_start_date else 'Not set' }}<br>
+                                <strong class="spacing-bottom">Location:</strong> {{ request.address }}<br>
+                                <strong>State:</strong> {{ request.state }},
+                                <strong>City:</strong> {{ request.city }},
+                                <strong>Zip Code:</strong> {{ request.zipcode }}
+                            </p>
+                        </div>
+                        <!-- Right side of the card -->
+                        <div class="col-md-6">
+                            <p class="card-text-style text-end">
+                                <strong class="spacing-bottom">Service:</strong> {{ request.service.service }}<br>
+                                <strong class="spacing-bottom">Quote:</strong> {{ request.quote }}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Showing Cards where is_approved is still empty, allowing customer to approve or deny -->
+                     {% if request.is_approved is none %}
+                        <form action="{{ url_for('approve_request', request_id=request.workrequest_ID) }}" method="POST">
+                            <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+                            <button type="submit" name="action" value="deny" class="btn btn-danger">Deny</button>
+                        </form>
+                    {% else %}
+                        <p>{{ 'Appointment approved' if request.is_approved else 'Appointment denied' }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+

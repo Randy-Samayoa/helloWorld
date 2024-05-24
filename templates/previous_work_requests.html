@@ -1,0 +1,52 @@
+{% extends "client_base.html" %}
+
+{% block page_title %}Previous Work Requests{% endblock %}
+
+{% block page_content %}
+<h1 class="centered">Previous Work Requests</h1>
+<h2 class="centered mt-4" style="color: #007BFF;">Statuses of Your Requests: </h2>
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>State</th>
+                <th>Email</th>
+                <th>Business Name</th>
+                <th colspan="2">Status & Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Filtering by current_user and showing requests only of the customer logged in -->
+            {% for client in clients %}
+            <tr>
+                <td>{{ client.user.first_name }}</td>
+                <td>{{ client.user.last_name }}</td>
+                <td>{{ client.state }}</td>
+                <td>{{ client.user.email }}</td>
+                <td>{{ client.business_name }}</td>
+                {% if not client.quoted %}
+                <!-- Show Edit and Delete buttons only if the request hasn't been approved yet -->
+                <!-- Edit Button -->
+                <td><a href="{{ url_for('edit_client', client_id=client.workrequest_ID) }}" class="btn btn-primary">Edit</a></td>
+                <!-- Delete Button -->
+                <td>
+                    <form action="{{ url_for('delete_client', client_id=client.workrequest_ID) }}" method="POST">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+                {% else %}
+                <!-- Displaying request approved if the request is approved and also checking if a quote was received to generate a status bar -->
+                <td colspan="2" >
+                  {{ 'Request Approved' if client.is_approved else ('Request Denied' if client.is_approved is not none else 'Quote Received: ' + client.quote) }}
+                </td>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

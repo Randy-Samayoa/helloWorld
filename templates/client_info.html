@@ -1,0 +1,33 @@
+{% extends "manager_base.html" %}
+
+{% block page_title %}Client Information{% endblock %}
+
+
+{% block page_content %}
+
+<h1 class="centered">Client Information</h1>
+
+<table class="table table-striped">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Business</th>
+        <th>Phone</th>
+        <th>Email</th>
+    </tr>
+<!-- Start looping over each customer in client_list -->
+
+    {% for customer in client_list %}
+    <tr>
+        <td>{{ customer.first_name }}</td>
+        <td>{{ customer.last_name }}</td>
+        <td>{{ customer.business_name }}</td>
+        <td>{{ customer.phone }}</td>
+        <td>{{ customer.email }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+{% endblock %}

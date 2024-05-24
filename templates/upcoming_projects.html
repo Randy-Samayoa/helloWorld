@@ -1,0 +1,82 @@
+{% extends "manager_base.html" %}
+
+{% block page_title %}Upcoming Projects{% endblock %}
+
+{% block page_content %}
+<h1 class="centered">Upcoming Projects</h1>
+<div class="container">
+<!--Looping through all projects in the projects table-->
+    {% for project in projects %}
+        <!--If the project is not completed, then perform the following code-->
+        {% if not project.is_completed %}
+    <div class="row justify-content-center">
+        <div class="col-md-11">
+            <div class="my-2 border cardstyle">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Left Side -->
+                        <div class="col-md-6">
+                            <p class="card-text-style">
+                                <!--Going from the project table, to the client table, to the user table to fetch the first name and last name-->
+                                <strong>Client:</strong> {{ project.client.user.first_name }} {{ project.client.user.last_name }}<br>
+                                <strong>Date and Time:</strong> {{ project.date_and_time }}<br>
+                                <strong>Location:</strong> {{ project.address }}<br>
+                                <strong>Service:</strong> {{ project.service.service }}<br>
+                                <strong>Quote:</strong> {{ project.client.quote }}
+                            </p>
+                        </div>
+                        <!-- Right side -->
+                        <div class="col-md-6">
+                        <!--If the project has not been assigned employees, then perform the following code-->
+                            {% if not project.is_assigned %}
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Assign Employees
+                                </button>
+                            <!--Here it is looping through all users with role: employee so they show up in a list from a dropdown
+                            menu list where they each can be selected-->
+                            <form method="POST" action="{{ url_for('assign_employees', project_id=project.project_id) }}">
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        {% for employee in employees %}
+                                        <li><input type="checkbox" name="employee_ids[]" value="{{ employee.user_id }}">
+                                            {{ employee.first_name }} {{ employee.last_name }}</li>
+                                        {% endfor %}
+                                        <li><button type="submit" class="btn btn-primary mt-2">Confirm</button></li>
+                                </ul>
+                            </form>
+                            </div>
+                                <!--If is_assigned = True, then perform the following code-->
+                            {% else %}
+                            <p>Assigned Employees:</p>
+                            <ul>
+                            <!--The following is to iterate through all assignments and provide the first and last name
+                            of the employees assigned to each project in a list-->
+                                {% for assignment in project.assignments %}
+                                <li>{{ assignment.user.first_name }} {{ assignment.user.last_name }}</li>
+                                {% endfor %}
+                            </ul>
+                            <form method="POST" action="{{ url_for('assign_employees', project_id=project.project_id) }}">
+                                <button type="submit" name="action" value="update" class="btn btn-primary">Change Assigned Employees</button>
+                            </form>
+                            {% endif %}
+                            <!-- Toggle Project Completion Button -->
+                            <form method="POST" action="{{ url_for('complete_project', project_id=project.project_id) }}">
+                                <button type="submit" class="btn btn-primary">
+                                    {% if project.is_completed %}
+                                        Project completed. Click to undo
+                                    {% else %}
+                                        Click to mark project as complete
+                                    {% endif %}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "home_base.html" %}
+{% block page_title %}Create Account{% endblock %}
+
+
+{% block page_content %}
+
+
+<img class="login-image" src="https://i.postimg.cc/hPrKfyPZ/Xand-Maintenance.png" alt="Company Logo" >
+
+<!-- Container for the Create Account Form -->
+<div>
+<h1 class="account">Create Your Account</h1>
+
+   <form action="{{ url_for('create_account') }}" method="POST">
+     <div class="form row">
+         <div class="col-md-6">
+         <!-- First Name input-->
+             <label for="inputFirstName" class="col-form-label">First Name:</label>
+             <input type="text" id="inputFirstName" name="first_name" class="form-control" placeholder="Enter First Name" required>
+         </div>
+         <!-- Last Name input -->
+        <div class="col-md-6">
+             <label for="inputLastName" class="col-form-label">Last Name:</label>
+             <input type="text" id="inputLastName" name="last_name" class="form-control" placeholder="Enter Last Name" required>
+        </div>
+     </div>
+
+     <!-- Email will be become the customer's username -->
+     <div class="form row">
+         <div class="col-md-6">
+         <!-- Business Name input-->
+             <label for="inputBusinessName" class="col-form-label">Business Name:</label>
+             <input type="text" id="inputBusinessName" name="business_name" class="form-control" placeholder="Enter Business Name" required>
+         </div>
+         <div class="col-md-6">
+         <!-- Phone Number -->
+            <label for="inputPhone" class="col-form-label">Phone Number:</label>
+            <input type="tel" id="inputPhone" name="phone" class="form-control" placeholder="Enter Phone Number (10 digits)" pattern="\d{10}" maxlength="10" required>
+         </div>
+     </div>
+
+     <div class="form row">
+         <div class="col-md-6">
+             <!-- Email input-->
+             <label for="inputEmail" class="col-form-label">Enter Email as Username:</label>
+             <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Username" required>
+         </div>
+         <div class="col-md-6">
+             <!-- Password input -->
+             <label for="inputPassword" class="col-form-label">Password:</label>
+             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Enter Password" required aria-describedby="passwordHelpInline" minlength="8" maxlength="20">
+             <span id="passwordHelpInline" class="form-text">
+               Must be 8-20 characters long.
+             </span>
+         </div>
+     </div>
+
+     <!-- Submit button for the form -->
+     <button type="submit" class="btn btn-primary">Create</button>
+   </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "client_base.html" %}
+
+{% block page_title %}Edit Client{% endblock %}
+
+{% block page_head %}Edit Client Information{% endblock %}
+
+{% block page_content %}
+<!-- Create form that inputs/populates data from client work request form, allowing manager to edit/update information taken from submitted work request from client side -->
+
+<form action="{{ url_for('update_client', client_id=client.workrequest_ID) }}" method="post" class="row g-3">
+    <div class="col-md-4">
+        <!-- Work Phone Number input -->
+        <label for="work_phonenumber" class="form-label">Work Phone Number</label>
+        <input type="text" class="form-control" id="work_phonenumber" name="work_phonenumber" value="{{ client.work_phonenumber }}" required>
+    </div>
+    <div class="col-md-4">
+        <!-- Personal Phone Number input -->
+        <label for="personal_phonenumber" class="form-label">Personal Phone Number</label>
+        <input type="text" class="form-control" id="personal_phonenumber" name="personal_phonenumber" value="{{ client.personal_phonenumber }}">
+    </div>
+    <div class="col-md-4">
+        <!-- Business Name input -->
+        <label for="business_name" class="form-label">Business Name</label>
+        <input type="text" class="form-control" id="business_name" name="business_name" value="{{ client.business_name }}" required>
+    </div>
+    <div class="col-md-4">
+        <!-- Address input -->
+        <label for="address" class="form-label">Address</label>
+        <input type="text" class="form-control" id="address" name="address" value="{{ client.address }}" required>
+    </div>
+    <div class="col-md-4">
+        <!-- State input-->
+        <label for="state" class="form-label">State</label>
+        <input type="text" class="form-control" id="state" name="state" value="{{ client.state }}" required>
+    </div>
+    <div class="col-md-4">
+        <!-- City input -->
+        <label for="city" class="form-label">City</label>
+        <input type="text" class="form-control" id="city" name="city" value="{{ client.city }}" required>
+    </div>
+    <div class="col-md-4">
+        <!-- Zipcode input -->
+        <label for="zipcode" class="form-label">Zip Code</label>
+        <input type="text" class="form-control" id="zipcode" name="zipcode" value="{{ client.zipcode }}" required>
+    </div>
+    <div class="col-md-4">
+        <!-- Special Request input -->
+        <label for="special_request" class="form-label">Special Request</label>
+        <input type="text" class="form-control" id="special_request" name="special_request" value="{{ client.special_request }}">
+    </div>
+    <div class="col-md-4">
+        <!-- Date and Time -->
+        <label for="date_and_time" class="form-label">Date and Time</label>
+        <input type="datetime-local" class="form-control" id="date_and_time" name="date_and_time" value="{{ client.date_and_time.strftime('%Y-%m-%dT%H:%M') if client.date_and_time }}">
+    </div>
+    <div class="col-md-4">
+        <!-- Type of Service input -->
+        <label for="service_id" class="form-label">Service</label>
+        <select class="form-control" id="service_id" name="service_id">
+            <!-- Loop through the different services using a dropdown menu -->
+            {% for service in services %}
+            <option value="{{ service.service_id }}" {% if client.service_id == service.service_id %}selected{% endif %}>
+                {{ service.service }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Client</button>
+</form>
+{% endblock %}
