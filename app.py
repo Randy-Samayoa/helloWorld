@@ -9,7 +9,6 @@ from models import *
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
-import yagmail
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
