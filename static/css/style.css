@@ -12,7 +12,7 @@
 
 /* color and style of all big headers*/
 h1 {
-    color: purple;
+    color: rgb(0,31,63);
     font-size: 3em;
     font-weight: bold;
     font-family: SansSerif;
@@ -29,10 +29,6 @@ h1.account {
 
 }
 
-h2 {
-    color: Purple;
-    font-weight: bold;
-}
 
 body.graycolor {
     background-color:lightgray;
@@ -335,4 +331,22 @@ height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.ecomm-navbar-color {
+    background-color: #e1e1e1;
+    margin-top: -40px;
+    margin-right: -40px;
+    margin-left: -40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid black;
+}
+
+.navbar-padding {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.nav-font-size {
+    font-size: 16px;
 }

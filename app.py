@@ -9,6 +9,7 @@ from models import *
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
+import yagmail
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -32,7 +33,7 @@ def load_user(user_id):
 
 @app.route('/')
 def home_page():
-   return render_template('welcome.html')
+   return render_template('home.html')
 
 
 @app.route('/login-page', methods =['GET','POST'])
@@ -698,3 +699,7 @@ def complete_project(project_id):
     else:
         flash('Project marked as incomplete.', 'success')
     return redirect(url_for('upcoming_projects'))
+
+@app.route('/contact-us')
+def contact_us():
+    return render_template('contact_us.html')
